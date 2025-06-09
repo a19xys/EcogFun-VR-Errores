@@ -1,0 +1,5 @@
+{
+    "video_file_names": ["video_vr1.mp4", "webcam1.mp4"],
+    "execution_file_name": "ejecucion1.json",
+    "errores_file_name": "errores1.json"
+}

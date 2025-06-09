@@ -8,6 +8,8 @@ using SimpleFileBrowser;
 public class FileManagerDistractors : MonoBehaviour {
     // Almacena la sesion actualmente cargada
     public SessionData currentSession;
+    // Guarda el path del archivo al cargarlo
+    public string currentFilePath;
 
     private CreadorDistractores creadorDistractores;
 
@@ -35,6 +37,7 @@ public class FileManagerDistractors : MonoBehaviour {
 
             // Guarda la sesion cargada como actual
             currentSession = session;
+            currentFilePath = filePath;
 
             // Llama al callback en el script principal para refrescar la UI
             caller.OnSessionLoaded(currentSession);
@@ -42,4 +45,13 @@ public class FileManagerDistractors : MonoBehaviour {
 
         yield return null;
     }
+
+    public void GuardarSesionEnArchivo() {
+        if (currentSession == null || string.IsNullOrEmpty(currentFilePath)) return;
+
+        string jsonString = JsonConvert.SerializeObject(currentSession, Formatting.Indented);
+        File.WriteAllText(currentFilePath, jsonString);
+        Debug.Log("Sesión guardada en: " + currentFilePath);
+    }
+
 }

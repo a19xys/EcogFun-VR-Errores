@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seleccione uno
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -568,17 +568,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Seleccione uno
-      m_Image: {fileID: 0}
-    - m_Text: "Cuaderno de matem\xE1ticas"
-      m_Image: {fileID: 0}
-    - m_Text: Plato
-      m_Image: {fileID: 0}
-    - m_Text: Trozo de pan
-      m_Image: {fileID: 0}
-    - m_Text: "Jam\xF3n"
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1604,7 +1594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29307583, g: 0.33647272, b: 0.6981132, a: 1}
+  m_Color: {r: 0.54509807, g: 0.5647059, b: 0.7372549, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1662,7 +1652,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.026367188}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &192480419
@@ -2150,7 +2140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seleccione uno
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3197,7 +3187,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -18, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &349443274
 MonoBehaviour:
@@ -3338,7 +3328,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 12
   m_fontSizeMax: 19
   m_fontStyle: 2
   m_HorizontalAlignment: 2
@@ -3885,6 +3875,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 553800969}
+        m_TargetAssemblyTypeName: BloqueDistractor, Assembly-CSharp
+        m_MethodName: MostrarVisualizacion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: RevisarBotonDeshacer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: RevisarBotonCrearDistractor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &400055015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4382,9 +4408,9 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 2
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 349443273}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2100108551}
@@ -4523,17 +4549,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Seleccione uno
-      m_Image: {fileID: 0}
-    - m_Text: Coger
-      m_Image: {fileID: 0}
-    - m_Text: Colocar en mantel azul
-      m_Image: {fileID: 0}
-    - m_Text: Guardar en mochila
-      m_Image: {fileID: 0}
-    - m_Text: Cortar
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6236,6 +6252,7 @@ MonoBehaviour:
     sessionName: 
     createdAt: 
     distractors: []
+  currentFilePath: 
 --- !u!114 &553800965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6250,11 +6267,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileManager: {fileID: 553800964}
   distractorScrollView: {fileID: 2028461463}
+  bloqueDistractor: {fileID: 553800969}
+  bloqueActivador: {fileID: 553800968}
+  bloqueDesactivador: {fileID: 553800967}
   cargarSesionButtonText: {fileID: 855916397}
   blocks_init:
   - {fileID: 521583638}
   - {fileID: 619978645}
   - {fileID: 475045396}
+  botonCrearDistractor: {fileID: 1622818880}
+  botonDeshacer: {fileID: 1478693501}
 --- !u!114 &553800967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6272,8 +6294,110 @@ MonoBehaviour:
   botonTiempo: {fileID: 285828027}
   dropdownAccion: {fileID: 1589142117}
   dropdownObjeto: {fileID: 53448295}
+  listaAcciones:
+  - Abrir
+  - Agarrar
+  - Calentar en microondas
+  - Cerrar
+  - Cocinar
+  - Colocar en fuego derecho
+  - Colocar en fuego izquierdo
+  - Colocar en mantel azul
+  - Colocar en mantel rojo
+  - Colocar en mostrador
+  - Colocar en salvamantel
+  - Colocar en tabla de cortar
+  - Colocar en zona de interaccion salon cocina
+  - Cortar
+  - Desenvolver
+  - Echar en olla
+  - Echar en sarten
+  - Envolver
+  - Guardar en bolsillo
+  - Guardar en mochila
+  - Sacar del bolsilo
+  - Sacar de bolsa de la compra
+  - Soltar
+  - Tocar con indice
+  listaObjetos:
+  - Aceite
+  - Agua
+  - Batido de chocolate
+  - Billete 5
+  - Billete 10
+  - Billete 20
+  - Botella de aceite
+  - Bocadillo
+  - Bol
+  - Boli azul
+  - Boli rojo
+  - Caramelo
+  - Carne picada
+  - Carne picada cocinada
+  - Cereales
+  - Colador
+  - Cuchara
+  - Cuaderno geografia
+  - Cuaderno ingles
+  - Cuaderno lengua
+  - Cuaderno matematicas
+  - Cuaderno naturales
+  - Cuaderno sociales
+  - Cuaderno tecnologia
+  - Cuchillo
+  - Donut
+  - Espatula
+  - Frigorifico
+  - Goma
+  - Jarra de agua
+  - Llaves
+  - Lapicero
+  - Leche
+  - Libro geografia
+  - Libro ingles
+  - Libro lengua
+  - Libro matematicas
+  - Libro naturales
+  - Libro sociales
+  - Libro tecnologia
+  - Loncha de chorizo
+  - Loncha de pavo
+  - Loncha de queso
+  - Loncha de serrano
+  - Loncha de salchichon
+  - Macarrones
+  - Macarrones con salsa de carne
+  - Macarrones hervidos
+  - Manzana
+  - Moneda 1
+  - Movil
+  - Olla
+  - Oregano
+  - Pack de chorizo
+  - Pack de pavo
+  - Pack de queso
+  - Pack de salchichon
+  - Pack de serrano
+  - Pan
+  - Papel de aluminio
+  - Plato
+  - Platano
+  - Rodaja de pan
+  - Sal
+  - Salsa de carne
+  - Sarten
+  - Tenedor
+  - Tomate
+  - Tomate frito
+  - Vaso
+  - Zumo
   inputTimeAccion: {fileID: 936594307}
   inputTime: {fileID: 329735810}
+  textoTipo: {fileID: 597479080}
+  textoDetalle: {fileID: 362132950}
+  contenedorNinguno: {fileID: 1887222134}
+  contenedorAccion: {fileID: 899112259}
+  contenedorTiempo: {fileID: 895902388}
   colorSeleccionado: {r: 0.23529413, g: 0.27058825, b: 0.58431375, a: 1}
   colorNormal: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &553800968
@@ -6294,12 +6418,115 @@ MonoBehaviour:
   botonEfectividad: {fileID: 1883760770}
   dropdownAccion: {fileID: 455466184}
   dropdownObjeto: {fileID: 1670800401}
+  listaAcciones:
+  - Abrir
+  - Agarrar
+  - Calentar en microondas
+  - Cerrar
+  - Cocinar
+  - Colocar en fuego derecho
+  - Colocar en fuego izquierdo
+  - Colocar en mantel azul
+  - Colocar en mantel rojo
+  - Colocar en mostrador
+  - Colocar en salvamantel
+  - Colocar en tabla de cortar
+  - Colocar en zona de interaccion salon cocina
+  - Cortar
+  - Desenvolver
+  - Echar en olla
+  - Echar en sarten
+  - Envolver
+  - Guardar en bolsillo
+  - Guardar en mochila
+  - Sacar del bolsilo
+  - Sacar de bolsa de la compra
+  - Soltar
+  - Tocar con indice
+  listaObjetos:
+  - Aceite
+  - Agua
+  - Batido de chocolate
+  - Billete 5
+  - Billete 10
+  - Billete 20
+  - Botella de aceite
+  - Bocadillo
+  - Bol
+  - Boli azul
+  - Boli rojo
+  - Caramelo
+  - Carne picada
+  - Carne picada cocinada
+  - Cereales
+  - Colador
+  - Cuchara
+  - Cuaderno geografia
+  - Cuaderno ingles
+  - Cuaderno lengua
+  - Cuaderno matematicas
+  - Cuaderno naturales
+  - Cuaderno sociales
+  - Cuaderno tecnologia
+  - Cuchillo
+  - Donut
+  - Espatula
+  - Frigorifico
+  - Goma
+  - Jarra de agua
+  - Llaves
+  - Lapicero
+  - Leche
+  - Libro geografia
+  - Libro ingles
+  - Libro lengua
+  - Libro matematicas
+  - Libro naturales
+  - Libro sociales
+  - Libro tecnologia
+  - Loncha de chorizo
+  - Loncha de pavo
+  - Loncha de queso
+  - Loncha de serrano
+  - Loncha de salchichon
+  - Macarrones
+  - Macarrones con salsa de carne
+  - Macarrones hervidos
+  - Manzana
+  - Moneda 1
+  - Movil
+  - Olla
+  - Oregano
+  - Pack de chorizo
+  - Pack de pavo
+  - Pack de queso
+  - Pack de salchichon
+  - Pack de serrano
+  - Pan
+  - Papel de aluminio
+  - Plato
+  - Platano
+  - Rodaja de pan
+  - Sal
+  - Salsa de carne
+  - Sarten
+  - Tenedor
+  - Tomate
+  - Tomate frito
+  - Vaso
+  - Zumo
   inputAciertos: {fileID: 1652258959}
   inputRate: {fileID: 1519614834}
   inputTimeAccion: {fileID: 721403942}
   inputTimeAciertos: {fileID: 1021720254}
   inputTime: {fileID: 1715587258}
   inputTimeEfectividad: {fileID: 1677528974}
+  textoTipo: {fileID: 659872883}
+  textoDetalle: {fileID: 1472949089}
+  contenedorAccion: {fileID: 1324098686}
+  contenedorAciertos: {fileID: 1930456783}
+  contenedorTiempo: {fileID: 512672617}
+  contenedorEfectividad: {fileID: 113995564}
   colorSeleccionado: {r: 0.23529413, g: 0.27058825, b: 0.58431375, a: 1}
   colorNormal: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &553800969
@@ -6316,6 +6543,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdownEscena: {fileID: 887469796}
   dropdownDistractor: {fileID: 1008086761}
+  listaEscenarios:
+  - Cocina
+  - Dormitorio
+  - "Sal\xF3n"
+  distractoresCocina: []
+  distractoresDormitorio: []
+  distractoresSalon:
+  - Aspiradora (cerca)
+  - Aspiradora (lejos)
+  - Ruidos callejeros
+  - "Televisi\xF3n"
+  - Tocadiscos
+  - Ventilador
+  textoTipo: {fileID: 632671948}
+  textoDetalle: {fileID: 862522739}
 --- !u!1 &568721374
 GameObject:
   m_ObjectHideFlags: 0
@@ -6482,8 +6724,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 699716729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchorMin: {x: 0, y: 0.000019550323}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8430,7 +8672,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1725817335}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999946
+  m_Size: 0.9998372
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9160,7 +9402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.1799927, y: 1.237}
+  m_AnchoredPosition: {x: -3.1799927, y: 1.2369995}
   m_SizeDelta: {x: -339.48, y: -2.4562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &855916397
@@ -9348,7 +9590,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 12
   m_fontSizeMax: 19
   m_fontStyle: 2
   m_HorizontalAlignment: 2
@@ -9493,7 +9735,6 @@ GameObject:
   - component: {fileID: 869577838}
   - component: {fileID: 869577842}
   - component: {fileID: 869577841}
-  - component: {fileID: 869577840}
   - component: {fileID: 869577839}
   m_Layer: 5
   m_Name: block1_edit
@@ -9570,28 +9811,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &869577840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869577837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0768e2b4d9574a47adeaef61e504dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoController: {fileID: 0}
-  notesController: {fileID: 0}
-  sceneInitializer: {fileID: 0}
-  contentPanel: {fileID: 0}
-  listItemPrefab: {fileID: 7714683019908527826, guid: edd7de4143803d54491538b424701812, type: 3}
-  button_type: {fileID: 0}
-  text_type: {fileID: 0}
-  actionCounts: 0000000000000000000000000000000000000000
-  correctCounts: 0000000000000000
-  buttons: []
 --- !u!114 &869577841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9605,7 +9824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29411766, g: 0.3372549, b: 0.69803923, a: 1}
+  m_Color: {r: 0.54509807, g: 0.5647059, b: 0.7372549, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9877,15 +10096,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Seleccione uno
-      m_Image: {fileID: 0}
-    - m_Text: Cocina
-      m_Image: {fileID: 0}
-    - m_Text: Dormitorio
-      m_Image: {fileID: 0}
-    - m_Text: "Sal\xF3n"
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -10123,7 +10334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29307583, g: 0.33647272, b: 0.6981132, a: 1}
+  m_Color: {r: 0.54509807, g: 0.5647059, b: 0.7372549, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -10181,7 +10392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.009773254}
   m_SizeDelta: {x: 0, y: 28}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &934562970
@@ -10241,9 +10452,9 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 2
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 694580939}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1861630325}
@@ -11229,7 +11440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seleccione uno
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11546,21 +11757,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Seleccione uno
-      m_Image: {fileID: 0}
-    - m_Text: Aspiradora (cerca)
-      m_Image: {fileID: 0}
-    - m_Text: Aspiradora (lejos)
-      m_Image: {fileID: 0}
-    - m_Text: Ruidos callejeros
-      m_Image: {fileID: 0}
-    - m_Text: "Televisi\xF3n"
-      m_Image: {fileID: 0}
-    - m_Text: Tocadiscos
-      m_Image: {fileID: 0}
-    - m_Text: Ventilador
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -12293,7 +12490,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -18, y: 0}
+  m_SizeDelta: {x: -17, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1028087969
 MonoBehaviour:
@@ -12543,6 +12740,42 @@ MonoBehaviour:
       - m_Target: {fileID: 553800967}
         m_TargetAssemblyTypeName: BloqueDesactivador, Assembly-CSharp
         m_MethodName: ResetUI
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800967}
+        m_TargetAssemblyTypeName: BloqueDesactivador, Assembly-CSharp
+        m_MethodName: MostrarVisualizacion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: RevisarBotonDeshacer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: RevisarBotonCrearDistractor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13183,7 +13416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Seleccione uno
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14448,6 +14681,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 553800968}
+        m_TargetAssemblyTypeName: BloqueActivador, Assembly-CSharp
+        m_MethodName: MostrarVisualizacion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: RevisarBotonDeshacer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: RevisarBotonCrearDistractor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1273651190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14762,7 +15031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.052984, y: -0.048049927}
+  m_AnchoredPosition: {x: -0.052984, y: -0.08418274}
   m_SizeDelta: {x: 203.71, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1309926517
@@ -15644,8 +15913,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1883337981}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 0.2}
+  m_AnchorMin: {x: 0, y: 0.000019550323}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -16095,7 +16364,7 @@ MonoBehaviour:
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 12
   m_fontSizeMax: 19
   m_fontStyle: 2
   m_HorizontalAlignment: 2
@@ -16225,10 +16494,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: DeshacerCambios
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16236,6 +16505,78 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: ExitScene
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 869577837}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 168780608}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 919922791}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1150232096}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1607149176}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1218287419}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1478693502
 MonoBehaviour:
@@ -16592,9 +16933,9 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 2
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 302446459}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1485778416}
@@ -18361,17 +18702,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Seleccione uno
-      m_Image: {fileID: 0}
-    - m_Text: Coger
-      m_Image: {fileID: 0}
-    - m_Text: Colocar en mantel azul
-      m_Image: {fileID: 0}
-    - m_Text: Guardar en mochila
-      m_Image: {fileID: 0}
-    - m_Text: Cortar
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -18973,10 +19304,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: CrearDistractor
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -18984,6 +19315,78 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: ExitScene
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 869577837}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 168780608}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 919922791}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1150232096}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1607149176}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1218287419}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1622818881
 MonoBehaviour:
@@ -19679,17 +20082,7 @@ MonoBehaviour:
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
-    m_Options:
-    - m_Text: Seleccione uno
-      m_Image: {fileID: 0}
-    - m_Text: "Cuaderno de matem\xE1ticas"
-      m_Image: {fileID: 0}
-    - m_Text: Plato
-      m_Image: {fileID: 0}
-    - m_Text: Trozo de pan
-      m_Image: {fileID: 0}
-    - m_Text: "Jam\xF3n"
-      m_Image: {fileID: 0}
+    m_Options: []
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -20521,7 +20914,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4281479730
   m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -20534,7 +20927,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -21240,8 +21633,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 579112270}
   m_HandleRect: {fileID: 579112269}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.2
+  m_Value: 1
+  m_Size: 0.99998045
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -22578,7 +22971,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4281479730
   m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -22591,7 +22984,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -23194,9 +23587,9 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 2
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 2046712693}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 491902329}
@@ -23354,9 +23747,9 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 2
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 1028087968}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1840190864}
@@ -24254,9 +24647,9 @@ MonoBehaviour:
   m_Vertical: 1
   m_MovementType: 2
   m_Elasticity: 0.1
-  m_Inertia: 1
+  m_Inertia: 0
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 2054920874}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1631465967}
@@ -24387,8 +24780,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1428331074}
   m_HandleRect: {fileID: 1428331073}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.2
+  m_Value: 1
+  m_Size: 0.99998045
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

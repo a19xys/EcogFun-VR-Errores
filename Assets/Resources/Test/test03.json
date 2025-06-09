@@ -1,0 +1,147 @@
+{
+  "id": "sesion_ejemplo_03",
+  "sessionName": "Sesión de pruebas nº3",
+  "createdAt": "2025-06-07T17:35:00Z",
+  "distractors": [
+    {
+      "id": "Salón-Televisión-1",
+      "scene": "Salón",
+      "distractorType": "Televisión",
+      "activation": {
+        "steps": [
+          {
+            "type": "success_count",
+            "params": {
+              "count": 10,
+              "time": 5
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": []
+      }
+    },
+    {
+      "id": "Salón-Tocadiscos-2",
+      "scene": "Salón",
+      "distractorType": "Tocadiscos",
+      "activation": {
+        "steps": [
+          {
+            "type": "action",
+            "params": {
+              "action": "Colocar en el mantel azul",
+              "item": "Plato",
+              "time": 10
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": []
+      }
+    },
+    {
+      "id": "Cocina-Horno-3",
+      "scene": "Cocina",
+      "distractorType": "Horno",
+      "activation": {
+        "steps": [
+          {
+            "type": "success_rate",
+            "params": {
+              "rate": 4,
+              "time": 60
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": [
+          {
+            "type": "time",
+            "params": {
+              "time": 15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "Salón-Aspiradora (cerca)-4",
+      "scene": "Salón",
+      "distractorType": "Aspiradora (cerca)",
+      "activation": {
+        "steps": [
+          {
+            "type": "time",
+            "params": {
+              "time": 150
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": [
+          {
+            "type": "action",
+            "params": {
+              "action": "Cortar",
+              "item": "Trozo de pan",
+              "time": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "Salón-Aspiradora (cerca)-5",
+      "scene": "Salón",
+      "distractorType": "Aspiradora (cerca)",
+      "activation": {
+        "steps": [
+          {
+            "type": "success_rate",
+            "params": {
+              "rate": 8,
+              "time": 60
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": [
+          {
+            "type": "action",
+            "params": {
+              "action": "Guardar en la mochila",
+              "item": "Libro de matemáticas",
+              "time": 2
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "Salón-Televisión-6",
+      "scene": "Salón",
+      "distractorType": "Televisión",
+      "activation": {
+        "steps": [
+          {
+            "type": "action",
+            "params": {
+              "action": "Abrir",
+              "item": "Batido de chocolate",
+              "time": 0
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+    "id_ejecucion": "Pedro_p820241205155601",
+    "list": [
+        {
+            "tipo": "Correcto",
+            "accion": "Sacar",
+            "objeto": "libro de matematicas",
+            "tiempo": 5.323999881744385,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Colocar",
+            "objeto": "plato en la mesa",
+            "tiempo": 12.878999710083008,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Apagar",
+            "objeto": "ventilador",
+            "tiempo": 18.43199920654297,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Romper",
+            "objeto": "juguete",
+            "tiempo": 21.5,
+            "nota": "Rompio intencionadamente un juguete ajeno."
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Guardar en mochila",
+            "objeto": "botella de agua",
+            "tiempo": 0.0,
+            "nota": "Olvido guardar la botella."
+        },
+        {
+            "tipo": "Repeticion",
+            "accion": "Cerrar",
+            "objeto": "puerta",
+            "tiempo": 29.333999633789064,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Encender",
+            "objeto": "luz del dormitorio",
+            "tiempo": 40.20000076293945,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Sacar",
+            "objeto": "libro de ciencia",
+            "tiempo": 40.20000076293945,
+            "nota": ""
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Apagar",
+            "objeto": "ventilador",
+            "tiempo": 56.78900146484375,
+            "nota": ""
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Cerrar",
+            "objeto": "armario",
+            "tiempo": 0.0,
+            "nota": "Dejo el armario abierto al terminar."
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Guardar en mochila",
+            "objeto": "cuaderno",
+            "tiempo": 62.345001220703128,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Cerrar",
+            "objeto": "puerta del balcon",
+            "tiempo": 72.91000366210938,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Lanzar",
+            "objeto": "juguete contra la pared",
+            "tiempo": 79.32099914550781,
+            "nota": "Fue advertido de no lanzar objetos, pero lo hizo igualmente."
+        }
+    ]
+}

@@ -1,0 +1,68 @@
+{
+    "id_ejecucion": "Curro_p220241115110718",
+    "list": [
+        {
+            "tipo": "Comision",
+            "accion": "Apagar",
+            "objeto": "luz",
+            "tiempo": 10.482072830200196,
+            "nota": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Coger",
+            "objeto": "cuaderno matematicas",
+            "tiempo": 14.389999389648438,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Guardar en mochila",
+            "objeto": "cuaderno matematicas",
+            "tiempo": 18.548824310302736,
+            "nota": ""
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Coger",
+            "objeto": "lapiz",
+            "tiempo": 20.600000381469728,
+            "nota": "Tú no metes cabra."
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Guardar en mochila",
+            "objeto": "lapiz",
+            "tiempo": 36.029685974121097,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Coger",
+            "objeto": "cuchillo",
+            "tiempo": 57.52499771118164,
+            "nota": "Ha jugado irresponsablemente con el cuchillo, aunque se le indicó que no lo hiciera."
+        },
+        {
+            "tipo": "Repeticion",
+            "accion": "Coger",
+            "objeto": "cuaderno matematicas",
+            "tiempo": 82.52499389648438,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Guardar en mochila",
+            "objeto": "cuaderno lengua",
+            "tiempo": 110.48207092285156,
+            "nota": ""
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Guardar en mochila",
+            "objeto": "bocadillo",
+            "tiempo": 0.0,
+            "nota": "Le distrajeron los juguetes de su habitación y el sonido del teléfono."
+        }
+    ]
+}

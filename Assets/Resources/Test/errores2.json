@@ -1,0 +1,208 @@
+{
+    "id_ejecucion": "MariaJose_p520241207022325",
+    "list": [
+        {
+            "tipo": "Correcto",
+            "accion": "Encender",
+            "objeto": "luz del salon",
+            "tiempo": 5.323999881744385,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Abrir",
+            "objeto": "ventana",
+            "tiempo": 12.878999710083008,
+            "nota": ""
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Cerrar",
+            "objeto": "puerta",
+            "tiempo": 18.43199920654297,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Coger",
+            "objeto": "botella de agua",
+            "tiempo": 21.5,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Tirar",
+            "objeto": "libros al suelo",
+            "tiempo": 29.333999633789064,
+            "nota": "Se le indico que no tirara los libros, pero lo hizo de manera intencionada."
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Cerrar",
+            "objeto": "ventana de la cocina",
+            "tiempo": 0.0,
+            "nota": "Olvido cerrar la ventana a pesar de que era parte de la instruccion."
+        },
+        {
+            "tipo": "Repeticion",
+            "accion": "Encender",
+            "objeto": "luz del salon",
+            "tiempo": 40.20000076293945,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Guardar en mochila",
+            "objeto": "libreta de dibujo",
+            "tiempo": 50.12300109863281,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Lanzar",
+            "objeto": "pelota",
+            "tiempo": 56.78900146484375,
+            "nota": ""
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Cerrar",
+            "objeto": "armario",
+            "tiempo": 62.345001220703128,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Desconectar",
+            "objeto": "television",
+            "tiempo": 72.91000366210938,
+            "nota": "Desconecto la television mientras otro la estaba usando."
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Coger",
+            "objeto": "llaves",
+            "tiempo": 0.0,
+            "nota": "No cogio las llaves aunque estaban frente a el."
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Sacar",
+            "objeto": "libro de matematicas",
+            "tiempo": 80.32099914550781,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Colocar",
+            "objeto": "plato en la mesa",
+            "tiempo": 90.43199920654297,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Apagar",
+            "objeto": "ventilador",
+            "tiempo": 100.12300109863281,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Romper",
+            "objeto": "juguete",
+            "tiempo": 112.45600128173828,
+            "nota": "Rompio intencionadamente un juguete ajeno."
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Guardar en mochila",
+            "objeto": "botella de agua",
+            "tiempo": 0.0,
+            "nota": "Olvido guardar la botella."
+        },
+        {
+            "tipo": "Repeticion",
+            "accion": "Cerrar",
+            "objeto": "puerta",
+            "tiempo": 120.78900146484375,
+            "nota": ""
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Encender",
+            "objeto": "luz del dormitorio",
+            "tiempo": 130.12399291992188,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Sacar",
+            "objeto": "libro de ciencia",
+            "tiempo": 140.34500122070313,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Gritar",
+            "objeto": "en la sala",
+            "tiempo": 150.1230010986328,
+            "nota": "Grito mientras otros estaban trabajando en silencio."
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Apagar",
+            "objeto": "ventilador",
+            "tiempo": 160.45599365234376,
+            "nota": ""
+        },
+        {
+            "tipo": "Omision",
+            "accion": "Cerrar",
+            "objeto": "armario",
+            "tiempo": 0.0,
+            "nota": "Dejo el armario abierto al terminar."
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Guardar en mochila",
+            "objeto": "cuaderno",
+            "tiempo": 170.1230010986328,
+            "nota": ""
+        },
+        {
+            "tipo": "Comision",
+            "accion": "Cerrar",
+            "objeto": "puerta del balcon",
+            "tiempo": 180.6540069580078,
+            "nota": ""
+        },
+        {
+            "tipo": "Romper las normas",
+            "accion": "Lanzar",
+            "objeto": "juguete contra la pared",
+            "tiempo": 190.3209991455078,
+            "nota": "Fue advertido de no lanzar objetos, pero lo hizo."
+        },
+        {
+            "tipo": "Correcto",
+            "accion": "Sacar",
+            "objeto": "bolsa del supermercado",
+            "tiempo": 200.1230010986328,
+            "nota": ""
+        },
+        {
+            "tipo": "Repeticion",
+            "accion": "Abrir",
+            "objeto": "ventana",
+            "tiempo": 210.45599365234376,
+            "nota": ""
+        },
+        {
+            "tipo": "Orden",
+            "accion": "Colocar",
+            "objeto": "mesa en su sitio",
+            "tiempo": 220.78900146484376,
+            "nota": ""
+        }
+    ]
+}
