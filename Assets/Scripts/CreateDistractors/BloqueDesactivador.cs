@@ -27,6 +27,9 @@ public class BloqueDesactivador : MonoBehaviour {
     public Color colorSeleccionado;
     public Color colorNormal;
 
+    public Color colorError;
+    public Color colorNormalTexto;
+
     private DesactivadorData datosGuardados = null;
     private string tipoSeleccionado = null;
     private string tipoAnterior = null;
@@ -160,13 +163,19 @@ public class BloqueDesactivador : MonoBehaviour {
     }
 
     public void MostrarVisualizacion() {
+
+        // Si no hay datos del desactivador
         if (datosGuardados == null) {
             textoTipo.text = "Seleccione uno";
             textoDetalle.text = "Seleccione uno";
+            ColoreaCampo(textoTipo);
+            ColoreaCampo(textoDetalle);
             return;
         }
 
-        switch (datosGuardados.tipo) {
+        // Si hay datos del desactivador
+        switch (datosGuardados.tipo)
+        {
             case "accion":
                 textoTipo.text = "Acción";
                 textoDetalle.text =
@@ -175,19 +184,30 @@ public class BloqueDesactivador : MonoBehaviour {
                     : $"{datosGuardados.accionElegida} {MinusculaInicial(datosGuardados.objetoElegido)}" +
                     (datosGuardados.time > 0
                         ? $", tras {FormatearTiempo(datosGuardados.time)}"
-                        : ", inmediatamente.");
+                        : ", inmediatamente");
                 break;
             case "tiempo":
                 textoTipo.text = "Tiempo";
                 textoDetalle.text = datosGuardados.time > 0
-                    ? $"Tras {FormatearTiempo(datosGuardados.time)} de distracción."
+                    ? $"Tras {FormatearTiempo(datosGuardados.time)} de distracción"
                     : "Seleccione uno";
                 break;
             case "ninguno":
-                textoTipo.text = "Ninguna";
-                textoDetalle.text = "Manual.";
+                textoTipo.text = "Ninguno";
+                textoDetalle.text = "Manualmente";
                 break;
         }
+
+        ColoreaCampo(textoTipo);
+        ColoreaCampo(textoDetalle);
+        
+    }
+    
+    private void ColoreaCampo(TMP_Text campo) {
+        if (campo.text == "Seleccione uno")
+            campo.color = colorError;
+        else
+            campo.color = colorNormalTexto;
     }
 
     private string FormatearTiempo(int segundos) {
@@ -220,7 +240,7 @@ public class BloqueDesactivador : MonoBehaviour {
                     && !string.IsNullOrEmpty(datosGuardados.objetoElegido)
                     && datosGuardados.time >= 0;
             case "tiempo":
-                return datosGuardados.time >= 0;
+                return datosGuardados.time > 0;
             default:
                 return false;
         }

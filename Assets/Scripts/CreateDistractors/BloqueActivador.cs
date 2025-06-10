@@ -34,6 +34,9 @@ public class BloqueActivador : MonoBehaviour {
     public Color colorSeleccionado;
     public Color colorNormal;
 
+    public Color colorError;
+    public Color colorNormalTexto;
+
     private ActivadorData datosGuardados = null;
     private string tipoSeleccionado = null;
     private string tipoAnterior = null;
@@ -190,12 +193,17 @@ public class BloqueActivador : MonoBehaviour {
     }
 
     public void MostrarVisualizacion() {
+        
+        // Si no hay datos del activador
         if (datosGuardados == null) {
             textoTipo.text = "Seleccione uno";
             textoDetalle.text = "Seleccione uno";
+            ColoreaCampo(textoTipo);
+            ColoreaCampo(textoDetalle);
             return;
         }
 
+        // Si hay datos del activador
         switch (datosGuardados.tipo) {
             case "accion":
                 textoTipo.text = "Acción";
@@ -205,7 +213,7 @@ public class BloqueActivador : MonoBehaviour {
                     : $"{datosGuardados.accionElegida} {MinusculaInicial(datosGuardados.objetoElegido)}" +
                     (datosGuardados.time > 0
                         ? $", tras {FormatearTiempo(datosGuardados.time)}"
-                        : ", inmediatamente.");
+                        : ", inmediatamente");
                 break;
 
             case "aciertos":
@@ -214,14 +222,14 @@ public class BloqueActivador : MonoBehaviour {
                     ? $"{datosGuardados.aciertos} acierto{(datosGuardados.aciertos > 1 ? "s" : "")}" +
                     (datosGuardados.time > 0
                         ? $", tras {FormatearTiempo(datosGuardados.time)}"
-                        : ", inmediatamente.")
+                        : ", inmediatamente")
                     : "Seleccione uno";
                 break;
 
             case "tiempo":
                 textoTipo.text = "Tiempo";
                 textoDetalle.text = datosGuardados.time > 0
-                    ? $"{FormatearTiempo(datosGuardados.time)} en la escena."
+                    ? $"{FormatearTiempo(datosGuardados.time)} en la escena"
                     : "Seleccione uno";
                 break;
 
@@ -231,13 +239,13 @@ public class BloqueActivador : MonoBehaviour {
                     ? $"Ratio de {datosGuardados.rate} acierto{(datosGuardados.rate > 1 ? "s" : "")} por minuto" +
                     (datosGuardados.time > 0
                         ? $", tras {FormatearTiempo(datosGuardados.time)}"
-                        : ", inmediatamente.")
+                        : ", inmediatamente")
                     : "Seleccione uno";
                 break;
 
             case "ninguno":
                 textoTipo.text = "Ninguna";
-                textoDetalle.text = "Manual.";
+                textoDetalle.text = "Manualmente";
                 break;
 
             default:
@@ -245,6 +253,17 @@ public class BloqueActivador : MonoBehaviour {
                 textoDetalle.text = "Seleccione uno";
                 break;
         }
+
+        ColoreaCampo(textoTipo);
+        ColoreaCampo(textoDetalle);
+        
+    }
+    
+    private void ColoreaCampo(TMP_Text campo) {
+        if (campo.text == "Seleccione uno")
+            campo.color = colorError;
+        else
+            campo.color = colorNormalTexto;
     }
 
     private string FormatearTiempo(int segundos) {
@@ -275,7 +294,7 @@ public class BloqueActivador : MonoBehaviour {
                     && !string.IsNullOrEmpty(datosGuardados.objetoElegido)
                     && datosGuardados.time >= 0;
             case "tiempo":
-                return datosGuardados.time >= 0;
+                return datosGuardados.time > 0;
             case "aciertos":
                 return datosGuardados.aciertos > 0 && datosGuardados.time >= 0;
             case "efectividad":

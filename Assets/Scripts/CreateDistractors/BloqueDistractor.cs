@@ -15,6 +15,10 @@ public class BloqueDistractor : MonoBehaviour {
     public TMP_Text textoTipo;
     public TMP_Text textoDetalle;
 
+    public Color colorError;
+    public Color colorNormalTexto;
+
+
     private EscenaDistractorData datosGuardados = null;
 
     void Start() {
@@ -72,8 +76,29 @@ public class BloqueDistractor : MonoBehaviour {
     }
 
     public void MostrarVisualizacion() {
+
+        // Si no hay datos del distractor
+        if (datosGuardados == null) {
+            textoTipo.text = "Seleccione uno";
+            textoDetalle.text = "Seleccione uno";
+            ColoreaCampo(textoTipo);
+            ColoreaCampo(textoDetalle);
+            return;
+        }
+
+        // Si hay datos del distractor
         textoTipo.text = string.IsNullOrEmpty(datosGuardados.escena) ? "Seleccione uno" : datosGuardados.escena;
         textoDetalle.text = string.IsNullOrEmpty(datosGuardados.distractor) ? "Seleccione uno" : datosGuardados.distractor;
+        ColoreaCampo(textoTipo);
+        ColoreaCampo(textoDetalle);
+        
+    }
+    
+    private void ColoreaCampo(TMP_Text campo) {
+        if (campo.text == "Seleccione uno")
+            campo.color = colorError;
+        else
+            campo.color = colorNormalTexto;
     }
 
     public bool TieneEleccionReal() {

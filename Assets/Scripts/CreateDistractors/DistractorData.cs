@@ -26,7 +26,7 @@ public class ActivationBlock {
 [Serializable]
 public class Step {
     public string type;
-    public Dictionary<string, object> @params;
+    public Dictionary<string, string> @params;
 }
 
 [System.Serializable]

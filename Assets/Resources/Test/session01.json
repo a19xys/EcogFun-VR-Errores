@@ -1,0 +1,46 @@
+{
+  "id": "sesion_ejemplo_01",
+  "sessionName": "Sesión de prueba nº1",
+  "createdAt": "2025-06-07T17:35:00Z",
+  "distractors": [
+    {
+      "id": "Salón-Televisión-1",
+      "scene": "Salón",
+      "distractorType": "Televisión",
+      "activation": {
+        "steps": [
+          {
+            "type": "success_count",
+            "params": {
+              "count": "10",
+              "time": "5"
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": []
+      }
+    },
+    {
+      "id": "Salón-Tocadiscos-2",
+      "scene": "Salón",
+      "distractorType": "Tocadiscos",
+      "activation": {
+        "steps": [
+          {
+            "type": "action",
+            "params": {
+              "action": "Colocar en el mantel azul",
+              "item": "Plato",
+              "time": "10"
+            }
+          }
+        ]
+      },
+      "deactivation": {
+        "steps": []
+      }
+    }
+  ]
+}
