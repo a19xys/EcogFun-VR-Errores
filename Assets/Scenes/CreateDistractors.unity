@@ -779,8 +779,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -270.4, y: 164.2}
-  m_SizeDelta: {x: 167.44, y: 26.69}
+  m_AnchoredPosition: {x: -269.45978, y: 164.2}
+  m_SizeDelta: {x: 202.59, y: 26.69}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &81207923
 MonoBehaviour:
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Distractores a\xF1adidos"
+  m_text: "Distractores de la sesi\xF3n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -829,7 +829,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17.3
+  m_fontSize: 18.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2417,7 +2417,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -3574,7 +3574,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -6383,9 +6383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSession:
-    id: 
-    sessionName: 
-    createdAt: 
+    Ordenada: 0
     distractors: []
   currentFilePath: 
 --- !u!114 &553800965
@@ -6419,7 +6417,12 @@ MonoBehaviour:
   - {fileID: 1218287419}
   botonCrearDistractor: {fileID: 1622818880}
   botonDeshacer: {fileID: 1478693501}
+  botonRefrescar: {fileID: 1912885488}
   cargarSesionButtonText: {fileID: 855916397}
+  tituloModo: {fileID: 971349321}
+  fondoUI: {fileID: 1363994958}
+  colorCreador: {r: 0.09019608, g: 0.101960786, b: 0.2, a: 1}
+  colorEditor: {r: 0.2, g: 0.09019609, b: 0.14255504, a: 1}
 --- !u!114 &553800967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8562,7 +8565,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -8821,7 +8824,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1725817335}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.9999377
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11121,7 +11124,7 @@ GameObject:
   - component: {fileID: 971349322}
   - component: {fileID: 971349321}
   m_Layer: 5
-  m_Name: test_title
+  m_Name: text_mode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11166,7 +11169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CREADOR DE DISTRACTORES
+  m_text: Creador de distractores
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11193,13 +11196,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
+  m_fontSize: 26.25
   m_fontSizeBase: 26
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 20
+  m_fontSizeMax: 30
+  m_fontStyle: 17
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -11229,7 +11232,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -195.11105, w: 1.569786}
+  m_margin: {x: 0, y: 0, z: -184.75659, w: 1.569786}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -14432,7 +14435,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -15180,7 +15183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.052984, y: -0.031784058}
+  m_AnchoredPosition: {x: -0.052984, y: 0.004180908}
   m_SizeDelta: {x: 203.71, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1309926517
@@ -15319,7 +15322,6 @@ GameObject:
   - component: {fileID: 1363994960}
   - component: {fileID: 1363994959}
   - component: {fileID: 1363994958}
-  - component: {fileID: 1363994957}
   m_Layer: 5
   m_Name: background
   m_TagString: Untagged
@@ -15327,28 +15329,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1363994957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363994956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0768e2b4d9574a47adeaef61e504dae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  videoController: {fileID: 0}
-  notesController: {fileID: 0}
-  sceneInitializer: {fileID: 0}
-  contentPanel: {fileID: 0}
-  listItemPrefab: {fileID: 7714683019908527826, guid: edd7de4143803d54491538b424701812, type: 3}
-  button_type: {fileID: 0}
-  text_type: {fileID: 0}
-  actionCounts: 0000000000000000000000000000000000000000
-  correctCounts: 0000000000000000
-  buttons: []
 --- !u!114 &1363994958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15362,7 +15342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09019609, g: 0.101960786, b: 0.2, a: 0.9490196}
+  m_Color: {r: 0.09019609, g: 0.101960786, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15776,7 +15756,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -17231,7 +17211,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 19, y: 19}
+  m_SizeDelta: {x: 22, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508977349
 MonoBehaviour:
@@ -17798,7 +17778,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -22317,7 +22297,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.81960785, g: 0.81960785, b: 0.81960785, a: 1}
     m_PressedColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -23122,15 +23102,15 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1912885489}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 5
+      - m_Target: {fileID: 553800965}
+        m_TargetAssemblyTypeName: CreadorDistractores, Assembly-CSharp
+        m_MethodName: AlternarModoEditor
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -23924,9 +23904,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da28533785eeed489cb9adc3aeac5e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distractorItemPrefab: {fileID: 7714683019908527826, guid: 334bf62f899c3594ba8b9f8f86f9a2ae, type: 3}
   contentPanel: {fileID: 1309926516}
+  distractorItemPrefab: {fileID: 7714683019908527826, guid: 334bf62f899c3594ba8b9f8f86f9a2ae, type: 3}
   textoNoHayDistractores: {fileID: 202560427}
+  colorNormal: {r: 0.8784314, g: 0.8784314, b: 0.8784314, a: 1}
+  colorSeleccionado: {r: 0.29411766, g: 0.3372549, b: 0.69803923, a: 1}
 --- !u!1 &2036739885
 GameObject:
   m_ObjectHideFlags: 0

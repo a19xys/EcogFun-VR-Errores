@@ -246,4 +246,20 @@ public class BloqueDesactivador : MonoBehaviour {
         }
     }
 
+    public void MostrarContenedorTipoSeleccionado() {
+        OcultarCamposDeTipos();
+        if (datosGuardados == null || string.IsNullOrEmpty(datosGuardados.tipo)) return;
+        switch (datosGuardados.tipo) {
+            case "accion":
+                if (contenedorAccion) contenedorAccion.SetActive(true);
+                break;
+            case "tiempo":
+                if (contenedorTiempo) contenedorTiempo.SetActive(true);
+                break;
+            case "ninguno":
+                if (contenedorNinguno) contenedorNinguno.SetActive(true);
+                break;
+        }
+    }
+
 }

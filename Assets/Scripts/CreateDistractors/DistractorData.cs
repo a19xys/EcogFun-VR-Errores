@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 [Serializable]
 public class SessionData {
-    public string id;
-    public string sessionName;
-    public string createdAt;
+    [JsonProperty(Order = 0)]
+    public List<object> Subelementos;
+    [JsonProperty(Order = 1)]
+    public bool Ordenada;
+    [JsonProperty(Order = 2)]
     public List<DistractorData> distractors;
 }
+
 
 [Serializable]
 public class DistractorData {
@@ -26,19 +30,17 @@ public class ActivationBlock {
 [Serializable]
 public class Step {
     public string type;
-    public Dictionary<string, string> @params;
+    public Dictionary<string, object> @params;
 }
 
 [System.Serializable]
-public class EscenaDistractorData
-{
+public class EscenaDistractorData {
     public string escena;
     public string distractor;
 }
 
 [System.Serializable]
-public class ActivadorData
-{
+public class ActivadorData {
     public string tipo; // "accion", "tiempo", "aciertos", "efectividad"
     public string accionElegida;
     public string objetoElegido;
@@ -48,8 +50,7 @@ public class ActivadorData
 }
 
 [System.Serializable]
-public class DesactivadorData
-{
+public class DesactivadorData {
     public string tipo; // "ninguno", "accion", "tiempo"
     public string accionElegida;
     public string objetoElegido;

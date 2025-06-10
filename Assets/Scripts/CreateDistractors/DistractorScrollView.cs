@@ -1,15 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
 public class DistractorScrollView : MonoBehaviour {
 
-    public GameObject distractorItemPrefab;
     public Transform contentPanel;
+    public GameObject distractorItemPrefab;
     public GameObject textoNoHayDistractores;
 
+    public Color colorNormal;
+    public Color colorSeleccionado;
+
+    private List<DistractorData> distractoresActuales;
+    private List<GameObject> distractorItems = new List<GameObject>();
+    private int indiceSeleccionado = -1;
+
+    private CreadorDistractores managerReferencia;
+    private bool esModoEditor;
+
     // Llamar con la lista de distractores cargados
-    public void MostrarDistractores(List<DistractorData> distractores) {
+    public void MostrarDistractores(List<DistractorData> distractores, bool modoEditor, CreadorDistractores manager) {
+        // Guardamos referencias
+        esModoEditor = modoEditor;
+        managerReferencia = manager;
+        distractorItems.Clear();
+        indiceSeleccionado = -1;
+        distractoresActuales = distractores;
 
         // Limpiar scrollview
         foreach (Transform child in contentPanel)
@@ -26,7 +43,9 @@ public class DistractorScrollView : MonoBehaviour {
         // Calculo de la numeracion con diccionario
         Dictionary<string, int> tipoCounter = new Dictionary<string, int>();
 
-        foreach (var distractor in distractores) {
+        for (int i = 0; i < distractores.Count; i++)
+        {
+            var distractor = distractores[i];
             string tipo = distractor.distractorType;
             if (!tipoCounter.ContainsKey(tipo))
                 tipoCounter[tipo] = 1;
@@ -35,19 +54,63 @@ public class DistractorScrollView : MonoBehaviour {
             int numero = tipoCounter[tipo];
 
             GameObject item = Instantiate(distractorItemPrefab, contentPanel);
+            distractorItems.Add(item);
+
+            // --- TEXTOS ---
             TextMeshProUGUI texto1 = item.transform.Find("text_1").GetComponent<TextMeshProUGUI>();
             TextMeshProUGUI texto2 = item.transform.Find("text_2").GetComponent<TextMeshProUGUI>();
 
             string nombreBonito = PrimeraLetraMayus(distractor.distractorType.Replace("_", " "));
             texto1.text = $"{nombreBonito} {numero:00}";
-
             string escenaBonita = PrimeraLetraMayus(distractor.scene.Replace("_", " "));
             string tipoActivacion = FormateaTipoTrigger(distractor.activation);
             string tipoDesactivacion = FormateaTipoTrigger(distractor.deactivation);
-
             texto2.text = $"{escenaBonita} · {tipoActivacion} · {tipoDesactivacion}";
+
+            // --- INTERACTIVIDAD EN MODO EDITOR ---
+            Button btn = item.GetComponent<Button>();
+            Image img = item.GetComponent<Image>();
+            if (img != null) img.color = colorNormal; // Reset color
+
+            if (btn != null)
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.interactable = esModoEditor;
+                if (esModoEditor)
+                {
+                    int idx = i;
+                    btn.onClick.AddListener(() => OnSelectDistractor(idx));
+                }
+            }
+
+            DistractorItemUI ui = item.GetComponent<DistractorItemUI>();
+            if (ui != null) {
+                ui.Inicializar(distractor, manager);
+                ui.SetInteractable(esModoEditor);
+            }
         }
-    
+    }
+
+    public void OnSelectDistractor(int idx) {
+        for (int i = 0; i < distractorItems.Count; i++) {
+            Image img = distractorItems[i].GetComponent<Image>();
+            if (img != null)
+                img.color = (i == idx) ? colorSeleccionado : colorNormal;
+        }
+        indiceSeleccionado = idx;
+
+        // Notificar al manager para que muestre la info en los bloques
+        if (managerReferencia != null && distractoresActuales != null && idx >= 0 && idx < distractoresActuales.Count)
+            managerReferencia.OnDistractorSeleccionado(distractoresActuales[idx]);
+    }
+
+    public void DeseleccionarDistractor() {
+        indiceSeleccionado = -1;
+        foreach (var item in distractorItems) {
+            Image img = item.GetComponent<Image>();
+            if (img != null)
+                img.color = colorNormal;
+        }
     }
 
     // Devuelve el nombre formateado del primer trigger

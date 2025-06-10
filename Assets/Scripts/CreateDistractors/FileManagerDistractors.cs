@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using SimpleFileBrowser;
 
 public class FileManagerDistractors : MonoBehaviour {
+
     // Almacena la sesion actualmente cargada
     public SessionData currentSession;
     // Guarda el path del archivo al cargarlo
@@ -28,21 +29,20 @@ public class FileManagerDistractors : MonoBehaviour {
             string filePath = FileBrowser.Result[0];
             string jsonText = File.ReadAllText(filePath);
 
-            // Intenta deserializar el JSON
+            // Deserializa como SessionData
             SessionData session = JsonConvert.DeserializeObject<SessionData>(jsonText);
 
-            // Chequea si el campo distractors existe o esta vacio
+            // Si no hay distractors, créalo como lista vacía
             if (session.distractors == null)
                 session.distractors = new List<DistractorData>();
 
-            // Guarda la sesion cargada como actual
+            // Guarda la sesion y el path
             currentSession = session;
             currentFilePath = filePath;
 
-            // Llama al callback en el script principal para refrescar la UI
-            caller.OnSessionLoaded(currentSession);
+            // Callback a UI
+            caller.OnSessionLoaded(currentSession, Path.GetFileName(filePath));
         }
-
         yield return null;
     }
 

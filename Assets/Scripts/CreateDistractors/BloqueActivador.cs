@@ -304,4 +304,23 @@ public class BloqueActivador : MonoBehaviour {
         }
     }
 
+    public void MostrarContenedorTipoSeleccionado() {
+        OcultarCamposDeTipos();
+        if (datosGuardados == null || string.IsNullOrEmpty(datosGuardados.tipo)) return;
+        switch (datosGuardados.tipo) {
+            case "accion":
+                if (contenedorAccion) contenedorAccion.SetActive(true);
+                break;
+            case "aciertos":
+                if (contenedorAciertos) contenedorAciertos.SetActive(true);
+                break;
+            case "tiempo":
+                if (contenedorTiempo) contenedorTiempo.SetActive(true);
+                break;
+            case "efectividad":
+                if (contenedorEfectividad) contenedorEfectividad.SetActive(true);
+                break;
+        }
+    }
+
 }
