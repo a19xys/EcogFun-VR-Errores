@@ -16,9 +16,15 @@ public class CreadorDistractores : MonoBehaviour {
     public GameObject[] blocks_edit;
     public GameObject[] blocks_visualize;
 
-    public Button botonCrearDistractor;
-    public Button botonDeshacer;
+    public GameObject botonDeshacerCambios;
+    public GameObject botonAnadirDistractor;
+    public GameObject botonEliminarDistractor;
+    public GameObject botonEditarDistractor;
+
     public Button botonRefrescar;
+    public Button botonDeshacer;
+    public Button botonCrearDistractor;
+    public Button botonEliminarDistractorBtn;
 
     public TextMeshProUGUI cargarSesionButtonText;
     public TMP_Text tituloModo;
@@ -27,6 +33,7 @@ public class CreadorDistractores : MonoBehaviour {
     public Color colorCreador;
     public Color colorEditor;
     
+    private DistractorData distractorSeleccionado = null;
     private bool esModoEditor = false;
 
     void Start() {
@@ -50,9 +57,7 @@ public class CreadorDistractores : MonoBehaviour {
         if (cargarSesionButtonText != null && !string.IsNullOrEmpty(fileName))
             cargarSesionButtonText.text = fileName;
 
-        if (blocks_init != null)
-            foreach (GameObject go in blocks_init)
-                if (go != null) go.SetActive(false);
+        ActivarBlocksInit(false);
 
         if (botonCrearDistractor != null)
             botonCrearDistractor.interactable = false;
@@ -125,6 +130,44 @@ public class CreadorDistractores : MonoBehaviour {
         DeshacerCambios();
 
         RevisarBotonRefrescar();
+    }
+
+    public void EliminarDistractorSeleccionado() {
+        if (!esModoEditor || distractorSeleccionado == null) return;
+
+        var session = fileManager.currentSession;
+        if (session == null || session.distractors == null) return;
+
+        // Elimina el distractor seleccionado de la lista
+        session.distractors.Remove(distractorSeleccionado);
+
+        // Guarda el JSON actualizado
+        fileManager.GuardarSesionEnArchivo();
+
+        // Refresca el ScrollView en modo editor
+        distractorScrollView.MostrarDistractores(session.distractors, esModoEditor, this);
+
+        // Deselecciona cualquier distractor y desactiva el boton
+        distractorSeleccionado = null;
+        SetEliminarDistractorInteractable(false);
+
+        // Limpia los bloques
+        bloqueDistractor.SetDatosGuardados(null);
+        bloqueActivador.SetDatosGuardados(null);
+        bloqueDesactivador.SetDatosGuardados(null);
+
+        bloqueDistractor.ResetUI();
+        bloqueActivador.ResetUI();
+        bloqueDesactivador.ResetUI();
+
+        bloqueActivador.OcultarCamposDeTipos();
+        bloqueDesactivador.OcultarCamposDeTipos();
+
+        bloqueDistractor.MostrarVisualizacion();
+        bloqueActivador.MostrarVisualizacion();
+        bloqueDesactivador.MostrarVisualizacion();
+
+        ActivarBlocksInit(true);
     }
 
     private ActivationBlock ConstruirActivationBlock(ActivadorData datos) {
@@ -222,8 +265,7 @@ public class CreadorDistractores : MonoBehaviour {
         AlternarBloquesVisualizacion(true);
     }
 
-    public void AlternarBloquesVisualizacion(bool visualizar)
-    {
+    public void AlternarBloquesVisualizacion(bool visualizar) {
         if (blocks_visualize != null)
             foreach (GameObject go in blocks_visualize)
                 if (go != null) go.SetActive(visualizar);
@@ -231,6 +273,13 @@ public class CreadorDistractores : MonoBehaviour {
         if (blocks_edit != null)
             foreach (GameObject go in blocks_edit)
                 if (go != null) go.SetActive(!visualizar);
+    }
+
+    public void ActivarBlocksInit(bool activar) {
+        if (blocks_init != null)
+            foreach (GameObject go in blocks_init)
+                if (go != null)
+                    go.SetActive(activar);
     }
 
     public void AlternarModoEditor() {
@@ -244,7 +293,13 @@ public class CreadorDistractores : MonoBehaviour {
         if (fondoUI != null)
             fondoUI.color = esModoEditor ? colorEditor : colorCreador;
 
+        DeshacerCambios();
         RefrescarScrollDistractores();
+        SetEliminarDistractorInteractable(!esModoEditor);
+        AlternarBotonesPorModo();
+        
+        if (esModoEditor) { ActivarBlocksInit(true); }
+        else { ActivarBlocksInit(false); }
     }
 
     public void CambiarAModoCreador() {
@@ -257,6 +312,7 @@ public class CreadorDistractores : MonoBehaviour {
 
         AlternarBloquesVisualizacion(true);
         RefrescarScrollDistractores();
+        AlternarBotonesPorModo();
         distractorScrollView.DeseleccionarDistractor();
     }
 
@@ -264,9 +320,30 @@ public class CreadorDistractores : MonoBehaviour {
         distractorScrollView.MostrarDistractores(fileManager.currentSession?.distractors ?? new List<DistractorData>(), esModoEditor, this);
     }
 
+    public void AlternarBotonesPorModo() {
+        bool esEditor = esModoEditor;
+
+        // Modo CREACION
+        if (!esEditor) {
+            if (botonDeshacerCambios) botonDeshacerCambios.SetActive(true);
+            if (botonAnadirDistractor) botonAnadirDistractor.SetActive(true);
+
+            if (botonEliminarDistractor) botonEliminarDistractor.SetActive(false);
+            if (botonEditarDistractor) botonEditarDistractor.SetActive(false);
+        }
+        // Modo EDICION
+        else {
+            if (botonDeshacerCambios) botonDeshacerCambios.SetActive(false);
+            if (botonAnadirDistractor) botonAnadirDistractor.SetActive(false);
+
+            if (botonEliminarDistractor) botonEliminarDistractor.SetActive(true);
+            if (botonEditarDistractor) botonEditarDistractor.SetActive(true);
+        }
+    }
+
     public void OnDistractorSeleccionado(DistractorData datos) {
-        
         if (!esModoEditor) return;
+        distractorSeleccionado = datos;
         
         // Rellenar bloques
         bloqueDistractor.SetDatosGuardados(new EscenaDistractorData {
@@ -298,6 +375,14 @@ public class CreadorDistractores : MonoBehaviour {
         bloqueDesactivador.RecuperarDatos();
         bloqueDesactivador.MostrarVisualizacion();
         bloqueDesactivador.MostrarContenedorTipoSeleccionado();
+        AlternarBloquesVisualizacion(true);
+        ActivarBlocksInit(false);
+        SetEliminarDistractorInteractable(true);
+    }
+
+    public void SetEliminarDistractorInteractable(bool interactable) {
+        if (botonEliminarDistractorBtn != null)
+            botonEliminarDistractorBtn.interactable = interactable;
     }
 
     private ActivadorData ActivadorDataFromActivation(ActivationBlock block) {
