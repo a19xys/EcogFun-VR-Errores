@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Newtonsoft.Json;
 
-public class CreadorDistractores : MonoBehaviour {
-    
+public class CreadorDistractores : MonoBehaviour
+{
+
     public FileManagerDistractors fileManager;
     public DistractorScrollView distractorScrollView;
     public BloqueDistractor bloqueDistractor;
@@ -25,6 +27,7 @@ public class CreadorDistractores : MonoBehaviour {
     public Button botonDeshacer;
     public Button botonCrearDistractor;
     public Button botonEliminarDistractorBtn;
+    public Button botonEditarDistractorBtn;
 
     public TextMeshProUGUI cargarSesionButtonText;
     public TMP_Text tituloModo;
@@ -32,23 +35,26 @@ public class CreadorDistractores : MonoBehaviour {
 
     public Color colorCreador;
     public Color colorEditor;
-    
+
     private DistractorData distractorSeleccionado = null;
+    private DistractorData distractorOriginalCopia = null;
     private bool esModoEditor = false;
 
-    void Start() {
+    void Start()
+    {
         if (botonCrearDistractor != null)
             botonCrearDistractor.interactable = false;
         if (botonDeshacer != null)
             botonDeshacer.interactable = false;
     }
 
-    public void CargarSesion() {
+    public void CargarSesion()
+    {
         StartCoroutine(fileManager.CargarSesionCoroutine(this));
     }
 
-    public void OnSessionLoaded(SessionData session, string fileName) {
-
+    public void OnSessionLoaded(SessionData session, string fileName)
+    {
         // Deshacer cambios para limpieza visual
         DeshacerCambios();
 
@@ -63,12 +69,13 @@ public class CreadorDistractores : MonoBehaviour {
             botonCrearDistractor.interactable = false;
         if (botonDeshacer != null)
             botonDeshacer.interactable = false;
-    
+
         RevisarBotonRefrescar();
         CambiarAModoCreador();
     }
 
-    public void RevisarBotonDeshacer() {
+    public void RevisarBotonDeshacer()
+    {
         bool hayDatos =
             (bloqueDistractor != null && bloqueDistractor.TieneEleccionReal()) ||
             (bloqueActivador != null && bloqueActivador.TieneEleccionReal()) ||
@@ -78,7 +85,8 @@ public class CreadorDistractores : MonoBehaviour {
             botonDeshacer.interactable = hayDatos;
     }
 
-    public void RevisarBotonCrearDistractor() {
+    public void RevisarBotonCrearDistractor()
+    {
         bool esValido =
             bloqueDistractor != null && bloqueDistractor.EsValido() &&
             bloqueActivador != null && bloqueActivador.EsValido() &&
@@ -88,7 +96,8 @@ public class CreadorDistractores : MonoBehaviour {
             botonCrearDistractor.interactable = esValido;
     }
 
-    public void RevisarBotonRefrescar() {
+    public void RevisarBotonRefrescar()
+    {
         bool sesionCargada = fileManager != null && fileManager.currentSession != null;
         bool hayDistractores = sesionCargada && fileManager.currentSession.distractors != null && fileManager.currentSession.distractors.Count > 0;
 
@@ -96,7 +105,8 @@ public class CreadorDistractores : MonoBehaviour {
             botonRefrescar.interactable = hayDistractores;
     }
 
-    public void CrearDistractor() {
+    public void CrearDistractor()
+    {
         var sessionActual = fileManager.currentSession;
         if (sessionActual == null) return;
 
@@ -110,9 +120,19 @@ public class CreadorDistractores : MonoBehaviour {
         var activador = bloqueActivador.GetDatosGuardados();
         var desactivador = bloqueDesactivador.GetDatosGuardados();
 
+        // Normalizamos los nombres de escena y distractor a minusculas y sin espacios ni acentos
+        string escenaId = NormalizarParaId(escena.escena);
+        string distractorId = NormalizarParaId(escena.distractor);
+
+        // Fecha y hora en formato yyyyMMdd_HHmmss
+        string timestamp = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
+
+        // "salon_television_20250611_143501"
+        string id = $"{escenaId}_{distractorId}_{timestamp}";
+
         var nuevoDistractor = new DistractorData
         {
-            id = $"{escena.escena}-{escena.distractor}-{sessionActual.distractors.Count + 1}",
+            id = id,
             scene = escena.escena,
             distractorType = escena.distractor,
             activation = ConstruirActivationBlock(activador),
@@ -167,14 +187,73 @@ public class CreadorDistractores : MonoBehaviour {
         bloqueActivador.MostrarVisualizacion();
         bloqueDesactivador.MostrarVisualizacion();
 
-        ActivarBlocksInit(true);
+        // Comprobar si no queda ningún distractor
+        if (session.distractors == null || session.distractors.Count == 0)
+        {
+            RevisarBotonRefrescar(); // Desactiva botón refrescar si corresponde
+            CambiarAModoCreador();   // Cambia automáticamente al modo creación
+        }
+        else { ActivarBlocksInit(true); }
     }
 
-    private ActivationBlock ConstruirActivationBlock(ActivadorData datos) {
+    public void ModificarDistractorSeleccionado() {
+        if (!esModoEditor || distractorSeleccionado == null || fileManager.currentSession == null)
+            return;
+
+        var distractores = fileManager.currentSession.distractors;
+        if (distractores == null || distractores.Count == 0)
+            return;
+
+        // Busca el índice del distractor original por su ID
+        int idx = distractores.FindIndex(d => d.id == distractorSeleccionado.id);
+        if (idx < 0)
+            return; // No encontrado
+
+        // Recoge los datos actuales de los bloques
+        var escena = bloqueDistractor.GetDatosGuardados();
+        var activador = bloqueActivador.GetDatosGuardados();
+        var desactivador = bloqueDesactivador.GetDatosGuardados();
+
+        // Genera nueva ID única
+        string escenaId = NormalizarParaId(escena.escena);
+        string distractorId = NormalizarParaId(escena.distractor);
+        string timestamp = System.DateTime.Now.ToString("yyyyMMdd_HHmmss");
+        string nuevoId = $"{escenaId}_{distractorId}_{timestamp}";
+
+        var distractorModificado = new DistractorData {
+            id = nuevoId,
+            scene = escena.escena,
+            distractorType = escena.distractor,
+            activation = ConstruirActivationBlock(activador),
+            deactivation = ConstruirDeactivationBlock(desactivador)
+        };
+
+        // Reemplaza en la misma posicion
+        distractores[idx] = distractorModificado;
+
+        // Guarda el JSON actualizado
+        fileManager.GuardarSesionEnArchivo();
+
+        // Refresca el scrollview
+        distractorScrollView.MostrarDistractores(distractores, esModoEditor, this);
+
+        // Selecciona de nuevo el distractor editado
+        int idxModificado = distractores.FindIndex(d => d.id == distractorModificado.id);
+        if (idxModificado >= 0)
+            distractorScrollView.OnSelectDistractor(idxModificado);
+
+        // Desactiva el botón de edición hasta el próximo cambio
+        SetEditarDistractorInteractable(false);
+    }
+
+    private ActivationBlock ConstruirActivationBlock(ActivadorData datos)
+    {
         var steps = new List<Step>();
-        switch (datos.tipo) {
+        switch (datos.tipo)
+        {
             case "accion":
-                steps.Add(new Step {
+                steps.Add(new Step
+                {
                     type = "action",
                     @params = new Dictionary<string, object> {
                         { "action", datos.accionElegida },
@@ -184,7 +263,8 @@ public class CreadorDistractores : MonoBehaviour {
                 });
                 break;
             case "aciertos":
-                steps.Add(new Step {
+                steps.Add(new Step
+                {
                     type = "success_count",
                     @params = new Dictionary<string, object> {
                         { "count", datos.aciertos },
@@ -193,15 +273,15 @@ public class CreadorDistractores : MonoBehaviour {
                 });
                 break;
             case "tiempo":
-                steps.Add(new Step {
+                steps.Add(new Step
+                {
                     type = "time",
-                    @params = new Dictionary<string, object> {
-                        { "time", datos.time }
-                    }
+                    @params = new Dictionary<string, object> { { "time", datos.time } }
                 });
                 break;
             case "efectividad":
-                steps.Add(new Step {
+                steps.Add(new Step
+                {
                     type = "success_rate",
                     @params = new Dictionary<string, object> {
                         { "rate", datos.rate },
@@ -213,11 +293,14 @@ public class CreadorDistractores : MonoBehaviour {
         return new ActivationBlock { steps = steps };
     }
 
-    private ActivationBlock ConstruirDeactivationBlock(DesactivadorData datos) {
+    private ActivationBlock ConstruirDeactivationBlock(DesactivadorData datos)
+    {
         var steps = new List<Step>();
-        switch (datos.tipo) {
+        switch (datos.tipo)
+        {
             case "accion":
-                steps.Add(new Step {
+                steps.Add(new Step
+                {
                     type = "action",
                     @params = new Dictionary<string, object> {
                         { "action", datos.accionElegida },
@@ -227,11 +310,10 @@ public class CreadorDistractores : MonoBehaviour {
                 });
                 break;
             case "tiempo":
-                steps.Add(new Step {
+                steps.Add(new Step
+                {
                     type = "time",
-                    @params = new Dictionary<string, object> {
-                        { "time", datos.time }
-                    }
+                    @params = new Dictionary<string, object> { { "time", datos.time } }
                 });
                 break;
             case "ninguno":
@@ -241,7 +323,8 @@ public class CreadorDistractores : MonoBehaviour {
         return new ActivationBlock { steps = steps };
     }
 
-    public void DeshacerCambios() {
+    public void DeshacerCambios()
+    {
         bloqueDistractor.SetDatosGuardados(null);
         bloqueActivador.SetDatosGuardados(null);
         bloqueDesactivador.SetDatosGuardados(null);
@@ -261,11 +344,12 @@ public class CreadorDistractores : MonoBehaviour {
             botonCrearDistractor.interactable = false;
         if (botonDeshacer != null)
             botonDeshacer.interactable = false;
-        
+
         AlternarBloquesVisualizacion(true);
     }
 
-    public void AlternarBloquesVisualizacion(bool visualizar) {
+    public void AlternarBloquesVisualizacion(bool visualizar)
+    {
         if (blocks_visualize != null)
             foreach (GameObject go in blocks_visualize)
                 if (go != null) go.SetActive(visualizar);
@@ -275,14 +359,16 @@ public class CreadorDistractores : MonoBehaviour {
                 if (go != null) go.SetActive(!visualizar);
     }
 
-    public void ActivarBlocksInit(bool activar) {
+    public void ActivarBlocksInit(bool activar)
+    {
         if (blocks_init != null)
             foreach (GameObject go in blocks_init)
                 if (go != null)
                     go.SetActive(activar);
     }
 
-    public void AlternarModoEditor() {
+    public void AlternarModoEditor()
+    {
         esModoEditor = !esModoEditor;
 
         // Cambia el texto del titulo
@@ -296,8 +382,9 @@ public class CreadorDistractores : MonoBehaviour {
         DeshacerCambios();
         RefrescarScrollDistractores();
         SetEliminarDistractorInteractable(!esModoEditor);
+        SetEditarDistractorInteractable(!esModoEditor);
         AlternarBotonesPorModo();
-        
+
         if (esModoEditor) { ActivarBlocksInit(true); }
         else { ActivarBlocksInit(false); }
     }
@@ -332,7 +419,8 @@ public class CreadorDistractores : MonoBehaviour {
             if (botonEditarDistractor) botonEditarDistractor.SetActive(false);
         }
         // Modo EDICION
-        else {
+        else
+        {
             if (botonDeshacerCambios) botonDeshacerCambios.SetActive(false);
             if (botonAnadirDistractor) botonAnadirDistractor.SetActive(false);
 
@@ -341,36 +429,38 @@ public class CreadorDistractores : MonoBehaviour {
         }
     }
 
-    public void OnDistractorSeleccionado(DistractorData datos) {
+    public void OnDistractorSeleccionado(DistractorData datos)
+    {
         if (!esModoEditor) return;
         distractorSeleccionado = datos;
-        
+
+        // Copia profunda del distractor original para comparar cambios
+        distractorOriginalCopia = CopiaProfundaDistractor(datos);
+
         // Rellenar bloques
-        bloqueDistractor.SetDatosGuardados(new EscenaDistractorData {
-            escena = datos.scene,
-            distractor = datos.distractorType
-        });
+        bloqueDistractor.SetDatosGuardados(new EscenaDistractorData { escena = datos.scene, distractor = datos.distractorType });
         bloqueDistractor.RecuperarDatos();
         bloqueDistractor.MostrarVisualizacion();
 
         // Activador
-        if (datos.activation != null && datos.activation.steps != null && datos.activation.steps.Count > 0) {
+        if (datos.activation != null && datos.activation.steps != null && datos.activation.steps.Count > 0)
+        {
             var step = datos.activation.steps[0];
             bloqueActivador.SetDatosGuardados(FromStepToActivadorData(step));
-        } else {
-            bloqueActivador.SetDatosGuardados(null);
         }
+        else { bloqueActivador.SetDatosGuardados(null); }
+
         bloqueActivador.RecuperarDatos();
         bloqueActivador.MostrarVisualizacion();
         bloqueActivador.MostrarContenedorTipoSeleccionado();
 
         // Desactivador
-        if (datos.deactivation != null && datos.deactivation.steps != null && datos.deactivation.steps.Count > 0) {
+        if (datos.deactivation != null && datos.deactivation.steps != null && datos.deactivation.steps.Count > 0)
+        {
             var step = datos.deactivation.steps[0];
             bloqueDesactivador.SetDatosGuardados(FromStepToDesactivadorData(step));
-        } else {
-            bloqueDesactivador.SetDatosGuardados(new DesactivadorData { tipo = "ninguno" });
         }
+        else { bloqueDesactivador.SetDatosGuardados(new DesactivadorData { tipo = "ninguno" }); }
 
         bloqueDesactivador.RecuperarDatos();
         bloqueDesactivador.MostrarVisualizacion();
@@ -378,6 +468,7 @@ public class CreadorDistractores : MonoBehaviour {
         AlternarBloquesVisualizacion(true);
         ActivarBlocksInit(false);
         SetEliminarDistractorInteractable(true);
+        SetEditarDistractorInteractable(false);
     }
 
     public void SetEliminarDistractorInteractable(bool interactable) {
@@ -385,74 +476,13 @@ public class CreadorDistractores : MonoBehaviour {
             botonEliminarDistractorBtn.interactable = interactable;
     }
 
-    private ActivadorData ActivadorDataFromActivation(ActivationBlock block) {
-        if (block == null || block.steps == null || block.steps.Count == 0) return new ActivadorData();
-
-        Step step = block.steps[0];
-        var data = new ActivadorData();
-
-        switch (step.type) {
-            case "action":
-                data.tipo = "accion";
-                if (step.@params != null) {
-                    data.accionElegida = step.@params.ContainsKey("action") ? step.@params["action"].ToString() : "";
-                    data.objetoElegido = step.@params.ContainsKey("item") ? step.@params["item"].ToString() : "";
-                    data.time = step.@params.ContainsKey("time") ? Convert.ToInt32(step.@params["time"]) : 0;
-                }
-                break;
-            case "time":
-                data.tipo = "tiempo";
-                if (step.@params != null)
-                    data.time = step.@params.ContainsKey("time") ? Convert.ToInt32(step.@params["time"]) : 0;
-                break;
-            case "success_count":
-                data.tipo = "aciertos";
-                if (step.@params != null) {
-                    data.aciertos = step.@params.ContainsKey("count") ? Convert.ToInt32(step.@params["count"]) : 0;
-                    data.time = step.@params.ContainsKey("time") ? Convert.ToInt32(step.@params["time"]) : 0;
-                }
-                break;
-            case "success_rate":
-                data.tipo = "efectividad";
-                if (step.@params != null) {
-                    data.rate = step.@params.ContainsKey("rate") ? Convert.ToInt32(step.@params["rate"]) : 0;
-                    data.time = step.@params.ContainsKey("time") ? Convert.ToInt32(step.@params["time"]) : 0;
-                }
-                break;
-        }
-        return data;
+    public void SetEditarDistractorInteractable(bool interactable) {
+        if (botonEditarDistractorBtn != null)
+            botonEditarDistractorBtn.interactable = interactable;
     }
 
-    private DesactivadorData DesactivadorDataFromDeactivation(ActivationBlock block) {
-        if (block == null || block.steps == null || block.steps.Count == 0) {
-            return new DesactivadorData { tipo = "ninguno" };
-        }
-
-        Step step = block.steps[0];
-        var data = new DesactivadorData();
-
-        switch (step.type) {
-            case "action":
-                data.tipo = "accion";
-                if (step.@params != null) {
-                    data.accionElegida = step.@params.ContainsKey("action") ? step.@params["action"].ToString() : "";
-                    data.objetoElegido = step.@params.ContainsKey("item") ? step.@params["item"].ToString() : "";
-                    data.time = step.@params.ContainsKey("time") ? Convert.ToInt32(step.@params["time"]) : 0;
-                }
-                break;
-            case "time":
-                data.tipo = "tiempo";
-                if (step.@params != null)
-                    data.time = step.@params.ContainsKey("time") ? Convert.ToInt32(step.@params["time"]) : 0;
-                break;
-            default:
-                data.tipo = "ninguno";
-                break;
-        }
-        return data;
-    }
-
-    public static ActivadorData FromStepToActivadorData(Step step) {
+    public static ActivadorData FromStepToActivadorData(Step step)
+    {
         var datos = new ActivadorData();
         switch (step.type)
         {
@@ -507,15 +537,18 @@ public class CreadorDistractores : MonoBehaviour {
         return datos;
     }
 
-    public static DesactivadorData FromStepToDesactivadorData(Step step) {
+    public static DesactivadorData FromStepToDesactivadorData(Step step)
+    {
         var datos = new DesactivadorData();
 
-        if (step == null) {
+        if (step == null)
+        {
             datos.tipo = "ninguno";
             return datos;
         }
 
-        switch (step.type) {
+        switch (step.type)
+        {
             case "action":
                 datos.tipo = "accion";
                 if (step.@params != null)
@@ -543,6 +576,113 @@ public class CreadorDistractores : MonoBehaviour {
                 break;
         }
         return datos;
+    }
+
+    private bool SonStepsIguales(Step a, Step b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        if (a.type != b.type) return false;
+        if ((a.@params == null) != (b.@params == null)) return false;
+        if (a.@params == null && b.@params == null) return true;
+
+        if (a.@params.Count != b.@params.Count) return false;
+        foreach (var kv in a.@params) {
+            if (!b.@params.ContainsKey(kv.Key)) return false;
+
+            var valA = kv.Value;
+            var valB = b.@params[kv.Key];
+
+            // Si ambos son numéricos, compara por valor
+            if (IsNumericType(valA) && IsNumericType(valB)) {
+                var longA = Convert.ToInt64(valA);
+                var longB = Convert.ToInt64(valB);
+                if (longA != longB) return false;
+            } else {
+                // Compara como string
+                if ((valA == null && valB != null) || (valA != null && valB == null)) return false;
+                if (valA != null && valA.ToString() != valB.ToString()) return false;
+            }
+        }
+        return true;
+    }
+
+    private bool IsNumericType(object obj) {
+        return obj is byte || obj is sbyte ||
+            obj is short || obj is ushort ||
+            obj is int || obj is uint ||
+            obj is long || obj is ulong ||
+            obj is float || obj is double || obj is decimal;
+    }
+
+    private bool HayCambiosEnBloqueDistractor() {
+        var datosEscena = bloqueDistractor.GetDatosGuardados();
+        return datosEscena.escena != distractorOriginalCopia.scene ||
+            datosEscena.distractor != distractorOriginalCopia.distractorType;
+    }
+
+    private bool HayCambiosEnBloqueActivador() {
+        var datosActivador = bloqueActivador.GetDatosGuardados();
+        var activacionOriginal = (distractorOriginalCopia.activation != null && distractorOriginalCopia.activation.steps != null && distractorOriginalCopia.activation.steps.Count > 0)
+            ? distractorOriginalCopia.activation.steps[0]
+            : null;
+        var datosActivadorBlock = ConstruirActivationBlock(datosActivador);
+        var activacionActual = (datosActivadorBlock != null && datosActivadorBlock.steps != null && datosActivadorBlock.steps.Count > 0)
+            ? datosActivadorBlock.steps[0]
+            : null;
+        return !SonStepsIguales(activacionOriginal, activacionActual);
+    }
+
+    private bool HayCambiosEnBloqueDesactivador() {
+        var datosDesactivador = bloqueDesactivador.GetDatosGuardados();
+        var desactivacionOriginal = (distractorOriginalCopia.deactivation != null && distractorOriginalCopia.deactivation.steps != null && distractorOriginalCopia.deactivation.steps.Count > 0)
+            ? distractorOriginalCopia.deactivation.steps[0]
+            : null;
+        var datosDesactivadorBlock = ConstruirDeactivationBlock(datosDesactivador);
+        var desactivacionActual = (datosDesactivadorBlock != null && datosDesactivadorBlock.steps != null && datosDesactivadorBlock.steps.Count > 0)
+            ? datosDesactivadorBlock.steps[0]
+            : null;
+        return !SonStepsIguales(desactivacionOriginal, desactivacionActual);
+    }
+
+    public void RevisarBotonEditarDistractorMultiBloque() {
+        if (!esModoEditor || distractorSeleccionado == null || distractorOriginalCopia == null) {
+            SetEditarDistractorInteractable(false);
+            return;
+        }
+        bool cambiado = HayCambiosEnBloqueDistractor() || HayCambiosEnBloqueActivador() || HayCambiosEnBloqueDesactivador();
+        bool datosValidos = bloqueDistractor.EsValido() && bloqueActivador.EsValido() && bloqueDesactivador.EsValido();
+        SetEditarDistractorInteractable(cambiado && datosValidos);
+    }
+
+    private DistractorData CopiaProfundaDistractor(DistractorData original)
+    {
+        string json = JsonConvert.SerializeObject(original);
+        return JsonConvert.DeserializeObject<DistractorData>(json);
+    }
+
+    private string NormalizarParaId(string input)
+    {
+        if (string.IsNullOrEmpty(input)) return "";
+
+        // Convertimos a minusculas
+        string normalized = input.ToLower();
+
+        // Quitamos acentos
+        normalized = normalized
+            .Replace("á", "a")
+            .Replace("é", "e")
+            .Replace("í", "i")
+            .Replace("ó", "o")
+            .Replace("ú", "u")
+            .Replace("ñ", "n");
+
+        // Espacios a "_"
+        normalized = normalized.Replace(" ", "_");
+
+        // Quitar cualquier caracter no alfanumerico ni "_"
+        normalized = System.Text.RegularExpressions.Regex.Replace(normalized, @"[^a-z0-9_]", "");
+
+        return normalized;
     }
 
 }
