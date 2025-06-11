@@ -5,6 +5,11 @@ using TMPro;
 [ExecuteInEditMode]
 public class TooltipManager : MonoBehaviour
 {
+
+    [Header("Tiempos de fundido")]
+    public float fadeInDuration = 0.32f;
+    public float fadeOutDuration = 0.18f;
+
     public TextMeshProUGUI headerField;
     public TextMeshProUGUI contentField;
     public LayoutElement layoutElement;
@@ -64,7 +69,7 @@ public class TooltipManager : MonoBehaviour
         rectTransform.anchoredPosition = anchoredPos;
     }
 
-    public void UpdatePosition(Vector2 offset)
+    public void UpdatePositionToMouse()
     {
         if (CanvasRectTransform == null)
         {
@@ -75,13 +80,51 @@ public class TooltipManager : MonoBehaviour
                 CanvasRectTransform = transform.root.GetComponent<RectTransform>();
         }
         if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
+
+        // 1. Obtener posición del mouse en el canvas
         Vector2 mousePosition = Input.mousePosition;
         Vector2 localPoint;
         Camera cam = GetCanvasCamera();
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(CanvasRectTransform, mousePosition, cam, out localPoint))
-        {
-            rectTransform.localPosition = localPoint + offset;
-        }
+        if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(CanvasRectTransform, mousePosition, cam, out localPoint))
+            return;
+
+        // 2. Obtener tamaño del tooltip
+        Vector2 tooltipSize = rectTransform.sizeDelta;
+
+        // 3. Obtener los límites del canvas (en local)
+        Vector2 canvasMin = CanvasRectTransform.rect.min;
+        Vector2 canvasMax = CanvasRectTransform.rect.max;
+
+        // --- Nuevo: decide el mejor pivot ---
+        Vector2 pivot = new Vector2(0, 1); // por defecto: esquina superior izquierda
+
+        // ¿Cabría el tooltip hacia la derecha del ratón?
+        bool fitsRight = (localPoint.x + tooltipSize.x) < canvasMax.x;
+        // ¿Cabría el tooltip hacia la izquierda del ratón?
+        bool fitsLeft = (localPoint.x - tooltipSize.x) > canvasMin.x;
+        // ¿Cabría el tooltip por arriba del ratón?
+        bool fitsUp = (localPoint.y + tooltipSize.y) < canvasMax.y;
+        // ¿Cabría el tooltip por debajo del ratón?
+        bool fitsDown = (localPoint.y - tooltipSize.y) > canvasMin.y;
+
+        // Si no cabe hacia abajo, pero sí hacia arriba
+        if (!fitsDown && fitsUp)
+            pivot.y = 0; // inferior
+        // Si tampoco cabe arriba, mantenemos el valor por defecto
+
+        // Si no cabe a la derecha, pero sí a la izquierda
+        if (!fitsRight && fitsLeft)
+            pivot.x = 1; // derecha
+        // Si tampoco cabe izquierda, mantenemos el valor por defecto
+
+        // Aplicar el pivot
+        rectTransform.pivot = pivot;
+
+        // 4. Asignar la posición final del tooltip
+        rectTransform.localPosition = localPoint;
+
+        // Opcional: Si quieres un pequeño desplazamiento para que no esté justo encima del ratón:
+        // rectTransform.localPosition += new Vector3(3, -3, 0);
     }
 
     public void AdjustSize()
@@ -110,22 +153,21 @@ public class TooltipManager : MonoBehaviour
     {
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         gameObject.SetActive(true);
-        fadeRoutine = StartCoroutine(FadeTo(1f, disableOnEnd: false));
+        fadeRoutine = StartCoroutine(FadeTo(1f, fadeInDuration, disableOnEnd: false));
     }
 
     public void FadeOut()
     {
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
         gameObject.SetActive(true); // Activo para que pueda hacer fade
-        fadeRoutine = StartCoroutine(FadeTo(0f, disableOnEnd: true));
+        fadeRoutine = StartCoroutine(FadeTo(0f, fadeOutDuration, disableOnEnd: true));
     }
 
-    private System.Collections.IEnumerator FadeTo(float targetAlpha, bool disableOnEnd)
+    private System.Collections.IEnumerator FadeTo(float targetAlpha, float duration, bool disableOnEnd)
     {
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null) yield break;
 
-        float duration = 0.18f;
         float startAlpha = canvasGroup.alpha;
         float t = 0f;
         while (t < duration)

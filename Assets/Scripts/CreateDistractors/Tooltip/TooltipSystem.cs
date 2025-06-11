@@ -6,10 +6,8 @@ public class TooltipSystem : MonoBehaviour
     public TooltipManager tooltip;
     public float appearDelay = 0.5f;
     public bool followMouse = true;
-    public Vector2 offset = new Vector2(20, -20);
 
     private static TooltipSystem current;
-
     private float timer;
     private bool pendingShow;
     private string pendingHeader;
@@ -37,7 +35,7 @@ public class TooltipSystem : MonoBehaviour
         // Seguir el ratón
         if (tooltip != null && tooltip.gameObject.activeSelf && followMouse)
         {
-            tooltip.UpdatePosition(offset);
+            tooltip.UpdatePositionToMouse();
         }
     }
 
@@ -67,7 +65,7 @@ public class TooltipSystem : MonoBehaviour
     {
         if (tooltip == null) return;
         tooltip.SetTextAndShow(header, content);
-        tooltip.UpdatePosition(offset);
+        tooltip.UpdatePositionToMouse();
     }
 
     private void HideImmediate()
